@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #prediction {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Dragon vs Tiger Prediction</h1>
+
+<p>Enter the result of the last 5 rounds (D for Dragon, T for Tiger):</p>
+<input type="text" id="rounds" placeholder="e.g. D, T, T, D, D" />
+<button onclick="predict()">Predict Next Round</button>
+
+<p id="prediction"></p>
+
+<script>
+    function predict() {
+        let rounds = document.getElementById("rounds").value.split(",");
+        rounds = rounds.map(r => r.trim().toUpperCase());
+
+        if (rounds.length < 5) {
+            document.getElementById("prediction").innerText = "Please enter at least 5 rounds.";
+            return;
+        }
+
+        let dragonCount = rounds.filter(r => r === "D").length;
+        let tigerCount = rounds.filter(r => r === "T").length;
+
+        let prediction = dragonCount > tigerCount ? "Next round is likely to be Dragon." : "Next round is likely to be Tiger.";
+        
+        document.getElementById("prediction").innerText = prediction;
+    }
+</script>
+
+</body>
+</html>
+run code 
